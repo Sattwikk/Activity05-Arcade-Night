@@ -1,0 +1,181 @@
+:root {
+    --bg: #0b0b16;
+    --panel: #15152a;
+    --text: #f5f5ff;
+    --accent: #00e5ff;
+    --accent-two: #ff2bd6;
+    --border: #35355c;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+}
+
+.site-header {
+    text-align: center;
+    padding: 2rem;
+}
+
+main {
+    width: min(1100px, 92%);
+    margin: 0 auto;
+}
+
+section {
+    margin: 3rem 0;
+}
+
+h2 {
+    text-align: center;
+}
+
+/* FLEXBOX */
+
+.arcade-container {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.arcade-card {
+    flex: 1 1 220px;
+    padding: 1.5rem;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    text-align: center;
+}
+
+.arcade-card button {
+    padding: 0.7rem 1.2rem;
+    border: 0;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* GRID */
+
+.game-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.grid-item {
+    min-height: 120px;
+    display: grid;
+    place-items: center;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    font-size: 2rem;
+}
+
+/* ANIMATION */
+
+.animation-track {
+    position: relative;
+    height: 100px;
+    overflow: hidden;
+    background: var(--panel);
+    border: 1px solid var(--border);
+}
+
+.player {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 30px;
+    left: 0;
+
+    background: var(--accent);
+    border-radius: 50%;
+
+    animation: movePlayer 4s linear infinite;
+}
+
+@keyframes movePlayer {
+    0% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(500px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+/* POSITIONING + Z-INDEX */
+
+.layer-box {
+    position: relative;
+    height: 180px;
+    background: var(--panel);
+}
+
+.back-layer,
+.front-layer {
+    position: absolute;
+    width: 150px;
+    height: 100px;
+
+    display: grid;
+    place-items: center;
+
+    border: 2px solid white;
+}
+
+.back-layer {
+    top: 20px;
+    left: 30%;
+    z-index: 1;
+}
+
+.front-layer {
+    top: 60px;
+    left: 40%;
+    z-index: 2;
+}
+
+/* MICRO-INTERACTION */
+
+.arcade-card {
+    transition: transform 0.2s ease;
+}
+
+.arcade-card:hover {
+    transform: translateY(-8px);
+}
+
+.arcade-card button:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 3px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 700px) {
+
+    .game-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .arcade-container {
+        flex-direction: column;
+    }
+
+    .arcade-card {
+        flex-basis: auto;
+    }
+}
